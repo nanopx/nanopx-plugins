@@ -8,7 +8,7 @@
     {
       "name": "agent-team-dev",
       "description": "Agent Team駆動の自律的開発ワークフロー。worktreeで隔離環境を作り、Agent Teamでタスクを分担実装する。",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "source": "./plugins/agent-team-dev",
       "category": "development"
     }
