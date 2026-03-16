@@ -66,19 +66,13 @@ git worktree add "$project_root/.worktrees/$branch_name" -b "$branch_name"
 cd "$project_root/.worktrees/$branch_name"
 ```
 
-### 6. stashの復元（該当する場合）
+### 6. 依存関係のセットアップ
+
+worktreeディレクトリ（`$project_root/.worktrees/$branch_name`）で、プロジェクトに応じて自動検出・実行（該当ファイルがない場合はスキップ）:
 
 ```bash
-# Step 2でstashした場合、元のブランチに戻してstashを復元
-# （worktreeでの作業が始まるので、メインのworking directoryを元に戻す）
-cd "$project_root"
-git checkout "$original_branch"
-git stash pop
+cd "$project_root/.worktrees/$branch_name"
 ```
-
-### 7. 依存関係のセットアップ
-
-worktreeディレクトリで、プロジェクトに応じて自動検出・実行（該当ファイルがない場合はスキップ）:
 
 | ファイル | コマンド |
 |---------|---------|
@@ -88,9 +82,18 @@ worktreeディレクトリで、プロジェクトに応じて自動検出・実
 | pyproject.toml | `poetry install` |
 | go.mod | `go mod download` |
 
-### 8. ベースラインテスト（任意）
+### 7. ベースラインテスト（任意）
 
 worktreeが正常かを確認するため、テストを実行して結果を報告する。
+
+### 8. stashの復元（該当する場合）
+
+```bash
+# Step 2でstashした場合、元のブランチに戻してstashを復元
+cd "$project_root"
+git checkout "$original_branch"
+git stash pop
+```
 
 ## ブランチ名の規則
 
